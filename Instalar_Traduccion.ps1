@@ -9,6 +9,7 @@ Set-StrictMode -Version 2.0
 $patchName = 'AnvilSpanish_P.pak'
 $patchSource = Join-Path $PSScriptRoot $patchName
 $expectedHash = 'EBF7B1F05F6B8F048100FA0937F17F07D23F544B591296F44B1E7515D8D71964'
+$expectedGameExeHash = '4772FF6C1ACCEB0A9671D70A4AE9383C03B20804061121AFD5001FBAFCCE87BB'
 
 function Test-IsAdministrator {
     $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
@@ -92,71 +93,80 @@ function Find-AnvilGamePath {
     throw 'No se ha encontrado Anvil Empires. Puedes abrir PowerShell y ejecutar el instalador con -GamePath "RUTA_DEL_JUEGO".'
 }
 
-function Set-AnvilCultureSpanish {
-    param(
-        [string]$ConfigPath,
-        [string]$BackupDirectory
-    )
+function Write-Utf8TextAtomic {
+    param([string]$Path, [string]$Text)
 
-    $configDirectory = Split-Path -Parent $ConfigPath
-    New-Item -ItemType Directory -Path $configDirectory -Force | Out-Null
-
-    if (Test-Path -LiteralPath $ConfigPath) {
-        Copy-Item -LiteralPath $ConfigPath -Destination (Join-Path $BackupDirectory 'Engine.ini')
-        $lines = New-Object System.Collections.Generic.List[string]
-        foreach ($line in Get-Content -LiteralPath $ConfigPath) {
-            $lines.Add([string]$line)
-        }
-    } else {
-        $lines = New-Object System.Collections.Generic.List[string]
-    }
-
-    $sectionIndex = -1
-    $sectionEnd = $lines.Count
-    for ($i = 0; $i -lt $lines.Count; $i++) {
-        if ($lines[$i].Trim() -ieq '[Internationalization]') {
-            $sectionIndex = $i
-            for ($j = $i + 1; $j -lt $lines.Count; $j++) {
-                if ($lines[$j].Trim() -match '^\[.+\]$') {
-                    $sectionEnd = $j
-                    break
-                }
-            }
-            break
-        }
-    }
-
-    if ($sectionIndex -lt 0) {
-        if ($lines.Count -gt 0 -and $lines[$lines.Count - 1] -ne '') {
-            $lines.Add('')
-        }
-        $lines.Add('[Internationalization]')
-        $lines.Add('Culture=es')
-    } else {
-        $cultureIndex = -1
-        for ($i = $sectionIndex + 1; $i -lt $sectionEnd; $i++) {
-            if ($lines[$i] -match '^\s*Culture\s*=') {
-                $cultureIndex = $i
-                break
-            }
-        }
-
-        if ($cultureIndex -ge 0) {
-            $lines[$cultureIndex] = 'Culture=es'
-        } else {
-            $lines.Insert($sectionIndex + 1, 'Culture=es')
-        }
-    }
-
+    $directory = Split-Path -Parent $Path
+    New-Item -ItemType Directory -Path $directory -Force | Out-Null
+    $temporaryPath = Join-Path $directory ('.anvil-spanish-{0}.tmp' -f [guid]::NewGuid().ToString('N'))
     $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
-    $temporaryConfig = "$ConfigPath.anvil-spanish.tmp"
     try {
-        [IO.File]::WriteAllLines($temporaryConfig, $lines, $utf8NoBom)
-        Move-Item -LiteralPath $temporaryConfig -Destination $ConfigPath -Force
-    } finally {
-        if (Test-Path -LiteralPath $temporaryConfig) {
-            Remove-Item -LiteralPath $temporaryConfig -Force
+        [IO.File]::WriteAllText($temporaryPath, $Text, $utf8NoBom)
+        if (Test-Path -LiteralPath $Path) {
+            [IO.File]::Replace($temporaryPath, $Path, $null, $true)
+        } else {
+            [IO.File]::Move($temporaryPath, $Path)
         }
+    } finally {
+        if (Test-Path -LiteralPath $temporaryPath) {
+            Remove-Item -LiteralPath $temporaryPath -Force
+        }
+    }
+}
+
+function Set-AnvilCultureSpanish {
+    param([string]$ConfigPath)
+
+    $lines = New-Object System.Collections.Generic.List[string]
+    if (Test-Path -LiteralPath $ConfigPath) {
+        foreach ($line in Get-Content -LiteralPath $ConfigPath) {
+            [void]$lines.Add([string]$line)
+        }
+    }
+
+    $result = New-Object System.Collections.Generic.List[string]
+    $previousCultureLines = New-Object System.Collections.Generic.List[string]
+    $insideInternationalization = $false
+    $hadInternationalizationSection = $false
+    $cultureInserted = $false
+
+    foreach ($line in $lines) {
+        $trimmed = $line.Trim()
+        if ($trimmed -match '^\[.+\]$') {
+            $insideInternationalization = ($trimmed -ieq '[Internationalization]')
+            if ($insideInternationalization) {
+                $hadInternationalizationSection = $true
+            }
+            [void]$result.Add($line)
+            if ($insideInternationalization -and -not $cultureInserted) {
+                [void]$result.Add('Culture=es')
+                $cultureInserted = $true
+            }
+            continue
+        }
+
+        if ($insideInternationalization -and $line -match '^\s*Culture\s*=') {
+            [void]$previousCultureLines.Add($line)
+            continue
+        }
+
+        [void]$result.Add($line)
+    }
+
+    if (-not $hadInternationalizationSection) {
+        if ($result.Count -gt 0 -and $result[$result.Count - 1] -ne '') {
+            [void]$result.Add('')
+        }
+        [void]$result.Add('[Internationalization]')
+        [void]$result.Add('Culture=es')
+    }
+
+    $text = ($result -join [Environment]::NewLine) + [Environment]::NewLine
+    Write-Utf8TextAtomic -Path $ConfigPath -Text $text
+
+    [pscustomobject]@{
+        HadInternationalizationSection = $hadInternationalizationSection
+        PreviousCultureLines = @($previousCultureLines)
     }
 }
 
@@ -177,6 +187,12 @@ try {
     }
 
     $resolvedGamePath = Find-AnvilGamePath -RequestedPath $GamePath
+    $gameExe = Join-Path $resolvedGamePath 'Anvil\Binaries\Win64\Anvil-Win64-Shipping.exe'
+    $gameExeHash = (Get-FileHash -LiteralPath $gameExe -Algorithm SHA256).Hash
+    if ($gameExeHash -ne $expectedGameExeHash) {
+        throw 'Esta traduccion se ha probado solamente con la build 00235. El ejecutable instalado pertenece a otra version y no se modificara.'
+    }
+
     $paksDirectory = Join-Path $resolvedGamePath 'Anvil\Content\Paks'
     if (-not (Test-Path -LiteralPath $paksDirectory)) {
         throw "No existe la carpeta de PAKs esperada: $paksDirectory"
@@ -185,6 +201,20 @@ try {
     $timestamp = Get-Date -Format 'yyyyMMdd-HHmmss'
     $backupDirectory = Join-Path $env:LOCALAPPDATA "AnvilSpanishTranslation\Backups\$timestamp"
     New-Item -ItemType Directory -Path $backupDirectory -Force | Out-Null
+
+    $engineConfig = Join-Path $env:LOCALAPPDATA 'Anvil\Saved\Config\Windows\Engine.ini'
+    $engineConfigExisted = Test-Path -LiteralPath $engineConfig
+    $engineConfigBackup = Join-Path $backupDirectory 'Engine.ini'
+    if ($engineConfigExisted) {
+        Copy-Item -LiteralPath $engineConfig -Destination $engineConfigBackup
+    }
+
+    $stateDirectory = Join-Path $env:LOCALAPPDATA 'AnvilSpanishTranslation'
+    $statePath = Join-Path $stateDirectory 'install-state.json'
+    $previousStateBackup = Join-Path $backupDirectory 'install-state.json'
+    if (Test-Path -LiteralPath $statePath) {
+        Copy-Item -LiteralPath $statePath -Destination $previousStateBackup
+    }
 
     $patchDestination = Join-Path $paksDirectory $patchName
     $hadPreviousPatch = Test-Path -LiteralPath $patchDestination
@@ -200,9 +230,31 @@ try {
             throw 'La verificacion del PAK instalado ha fallado.'
         }
 
-        $engineConfig = Join-Path $env:LOCALAPPDATA 'Anvil\Saved\Config\Windows\Engine.ini'
-        Set-AnvilCultureSpanish -ConfigPath $engineConfig -BackupDirectory $backupDirectory
+        $cultureState = Set-AnvilCultureSpanish -ConfigPath $engineConfig
+        $installState = [ordered]@{
+            Version = 1
+            PatchHash = $expectedHash
+            GamePath = $resolvedGamePath
+            EngineConfigPath = $engineConfig
+            EngineConfigExisted = $engineConfigExisted
+            HadInternationalizationSection = $cultureState.HadInternationalizationSection
+            PreviousCultureLines = @($cultureState.PreviousCultureLines)
+            BackupDirectory = $backupDirectory
+        }
+        Write-Utf8TextAtomic -Path $statePath -Text (($installState | ConvertTo-Json -Depth 4) + [Environment]::NewLine)
     } catch {
+        if ($engineConfigExisted -and (Test-Path -LiteralPath $engineConfigBackup)) {
+            Copy-Item -LiteralPath $engineConfigBackup -Destination $engineConfig -Force
+        } elseif ((-not $engineConfigExisted) -and (Test-Path -LiteralPath $engineConfig)) {
+            Remove-Item -LiteralPath $engineConfig -Force
+        }
+
+        if (Test-Path -LiteralPath $previousStateBackup) {
+            Copy-Item -LiteralPath $previousStateBackup -Destination $statePath -Force
+        } elseif (Test-Path -LiteralPath $statePath) {
+            Remove-Item -LiteralPath $statePath -Force
+        }
+
         if ($hadPreviousPatch -and (Test-Path -LiteralPath $previousPatchBackup)) {
             Copy-Item -LiteralPath $previousPatchBackup -Destination $patchDestination -Force
         } elseif (Test-Path -LiteralPath $patchDestination) {

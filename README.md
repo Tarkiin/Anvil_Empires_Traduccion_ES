@@ -1,6 +1,7 @@
 # Traducción al español de Anvil Empires
 
 Traducción comunitaria **no oficial** de *Anvil Empires* al español de España.
+Esta traducción solo esta creada y mantenida por **Tarkin**
 
 ## Estado actual
 
@@ -33,13 +34,13 @@ C:\Program Files (x86)\Steam\steamapps\common\Anvil Playtest\Anvil\Content\Paks
 
 Si Steam está instalado en otra unidad, utiliza la carpeta equivalente de esa biblioteca.
 
-3. Abre o crea este archivo:
+1. Abre o crea este archivo:
 
 ```text
 %LOCALAPPDATA%\Anvil\Saved\Config\Windows\Engine.ini
 ```
 
-4. Añade al final:
+1. Añade al final:
 
 ```ini
 [Internationalization]
