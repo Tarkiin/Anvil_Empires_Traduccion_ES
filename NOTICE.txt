@@ -1,0 +1,19 @@
+TRADUCCION NO OFICIAL DE ANVIL EMPIRES
+
+Este es un proyecto comunitario de fans. No esta afiliado, patrocinado,
+aprobado ni mantenido por Siege Camp.
+
+Anvil Empires, sus marcas, textos originales y recursos pertenecen a sus
+respectivos titulares. El parche se ofrece gratuitamente para uso personal
+con una copia legitima del juego y no incluye el juego completo.
+
+No se permite presentar esta traduccion como un producto oficial ni vender
+el parche. Las herramientas y dependencias de terceros conservan sus propias
+licencias y no se incluyen en la descarga para usuarios finales.
+
+El juego esta en desarrollo. El uso del parche queda sujeto a las condiciones
+del juego, de Steam y del playtest que resulten aplicables.
+
+La licencia MIT incluida en LICENSE se aplica unicamente a los scripts y a la
+documentacion originales de este repositorio. No concede derechos sobre Anvil
+Empires, sus textos originales, sus recursos ni el parche derivado.

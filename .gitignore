@@ -1,0 +1,34 @@
+# Material de desarrollo o extraído: no debe publicarse aquí
+extracted/
+backups/
+work/
+build/
+catalog/
+tools/
+*.uasset
+*.uexp
+*.ubulk
+*.ucas
+*.utoc
+*.locres
+*.locmeta
+*.exe
+*.dll
+*.pdb
+
+# Bloquear otros PAK por defecto y permitir sólo el parche final
+*.pak
+!AnvilSpanish_P.pak
+
+# Copias, borradores y archivos temporales
+*.bak
+*.tmp
+*.draft
+Backups/
+
+# Archivos del sistema y editores
+Thumbs.db
+Desktop.ini
+.DS_Store
+.idea/
+.vscode/
