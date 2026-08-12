@@ -215,7 +215,7 @@ function Ensure-VersionPackage {
 }
 
 try {
-    Write-Host '=== Instalador online de la traduccion de Anvil Empires ===' -ForegroundColor Cyan
+    Write-Host '=== Instalador online de la traduccion de Anvil Empires traducido por Tarkin ===' -ForegroundColor Cyan
     $commitSha = Get-LatestCommitSha
     $package = Ensure-VersionPackage -CommitSha $commitSha
     Write-Host ('Version preparada: {0}' -f $package.CommitSha.Substring(0, 12)) -ForegroundColor Green
