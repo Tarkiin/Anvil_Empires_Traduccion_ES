@@ -6,7 +6,7 @@ param(
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 2.0
 
-$expectedHash = 'EBF7B1F05F6B8F048100FA0937F17F07D23F544B591296F44B1E7515D8D71964'
+$expectedHash = '7B5E1073AEE8D45D1AED2A1069E50703EB38EF7B376B44347DC8FA3FDE80E8AC'
 
 function Test-IsAdministrator {
     $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
@@ -76,6 +76,83 @@ function Find-AnvilGamePath {
     throw 'No se ha encontrado Anvil Empires. Ejecuta el desinstalador con -GamePath "RUTA_DEL_JUEGO".'
 }
 
+function Write-Utf8TextAtomic {
+    param([string]$Path, [string]$Text)
+
+    $directory = Split-Path -Parent $Path
+    New-Item -ItemType Directory -Path $directory -Force | Out-Null
+    $temporaryPath = Join-Path $directory ('.anvil-spanish-{0}.tmp' -f [guid]::NewGuid().ToString('N'))
+    $replacementBackup = Join-Path $directory ('.anvil-spanish-{0}.replace-backup' -f [guid]::NewGuid().ToString('N'))
+    $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+    try {
+        [IO.File]::WriteAllText($temporaryPath, $Text, $utf8NoBom)
+        if (Test-Path -LiteralPath $Path) {
+            [IO.File]::Replace($temporaryPath, $Path, $replacementBackup, $true)
+        } else {
+            [IO.File]::Move($temporaryPath, $Path)
+        }
+    } finally {
+        if (Test-Path -LiteralPath $temporaryPath) {
+            Remove-Item -LiteralPath $temporaryPath -Force
+        }
+        if (Test-Path -LiteralPath $replacementBackup) {
+            Remove-Item -LiteralPath $replacementBackup -Force
+        }
+    }
+}
+
+function Restore-AnvilCulture {
+    param(
+        [string]$ConfigPath,
+        [string[]]$PreviousCultureLines
+    )
+
+    if (-not (Test-Path -LiteralPath $ConfigPath)) {
+        return
+    }
+
+    $result = New-Object System.Collections.Generic.List[string]
+    $insideInternationalization = $false
+    $foundInternationalization = $false
+    $previousInserted = $false
+
+    foreach ($line in Get-Content -LiteralPath $ConfigPath) {
+        $trimmed = $line.Trim()
+        if ($trimmed -match '^\[.+\]$') {
+            $insideInternationalization = ($trimmed -ieq '[Internationalization]')
+            if ($insideInternationalization) {
+                $foundInternationalization = $true
+            }
+            [void]$result.Add([string]$line)
+            if ($insideInternationalization -and -not $previousInserted) {
+                foreach ($previousLine in @($PreviousCultureLines)) {
+                    [void]$result.Add([string]$previousLine)
+                }
+                $previousInserted = $true
+            }
+            continue
+        }
+
+        if ($insideInternationalization -and $line -match '^\s*Culture\s*=') {
+            continue
+        }
+
+        [void]$result.Add([string]$line)
+    }
+
+    if ((-not $foundInternationalization) -and @($PreviousCultureLines).Count -gt 0) {
+        if ($result.Count -gt 0 -and $result[$result.Count - 1] -ne '') {
+            [void]$result.Add('')
+        }
+        [void]$result.Add('[Internationalization]')
+        foreach ($previousLine in @($PreviousCultureLines)) {
+            [void]$result.Add([string]$previousLine)
+        }
+    }
+
+    Write-Utf8TextAtomic -Path $ConfigPath -Text (($result -join [Environment]::NewLine) + [Environment]::NewLine)
+}
+
 try {
     Write-Host '=== Desinstalar traduccion de Anvil Empires ===' -ForegroundColor Cyan
     if (Get-Process -Name 'Anvil-Win64-Shipping' -ErrorAction SilentlyContinue) {
@@ -95,7 +172,27 @@ try {
         $backupDirectory = Join-Path $env:LOCALAPPDATA "AnvilSpanishTranslation\Backups\uninstall-$timestamp"
         New-Item -ItemType Directory -Path $backupDirectory -Force | Out-Null
         Copy-Item -LiteralPath $patchPath -Destination (Join-Path $backupDirectory 'AnvilSpanish_P.pak')
+
+        $statePath = Join-Path $env:LOCALAPPDATA 'AnvilSpanishTranslation\install-state.json'
+        if (Test-Path -LiteralPath $statePath) {
+            $installState = Get-Content -LiteralPath $statePath -Raw | ConvertFrom-Json
+            if ($installState.PatchHash -ne $expectedHash) {
+                throw 'El estado de instalacion pertenece a otra version. No se modificara Engine.ini automaticamente.'
+            }
+
+            $configPath = [string]$installState.EngineConfigPath
+            if ($configPath -and (Test-Path -LiteralPath $configPath)) {
+                Copy-Item -LiteralPath $configPath -Destination (Join-Path $backupDirectory 'Engine.ini')
+                Restore-AnvilCulture -ConfigPath $configPath -PreviousCultureLines @($installState.PreviousCultureLines)
+            }
+        } else {
+            Write-Host 'Aviso: no existe el estado de instalacion; Culture=es no se modificara automaticamente.' -ForegroundColor Yellow
+        }
+
         Remove-Item -LiteralPath $patchPath -Force
+        if (Test-Path -LiteralPath $statePath) {
+            Remove-Item -LiteralPath $statePath -Force
+        }
         Write-Host "Parche eliminado: $patchPath" -ForegroundColor Green
         Write-Host "Copia recuperable: $backupDirectory"
     } else {

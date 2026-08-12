@@ -8,7 +8,7 @@ Set-StrictMode -Version 2.0
 
 $patchName = 'AnvilSpanish_P.pak'
 $patchSource = Join-Path $PSScriptRoot $patchName
-$expectedHash = 'EBF7B1F05F6B8F048100FA0937F17F07D23F544B591296F44B1E7515D8D71964'
+$expectedHash = '7B5E1073AEE8D45D1AED2A1069E50703EB38EF7B376B44347DC8FA3FDE80E8AC'
 $expectedGameExeHash = '4772FF6C1ACCEB0A9671D70A4AE9383C03B20804061121AFD5001FBAFCCE87BB'
 
 function Test-IsAdministrator {
@@ -99,17 +99,21 @@ function Write-Utf8TextAtomic {
     $directory = Split-Path -Parent $Path
     New-Item -ItemType Directory -Path $directory -Force | Out-Null
     $temporaryPath = Join-Path $directory ('.anvil-spanish-{0}.tmp' -f [guid]::NewGuid().ToString('N'))
+    $replacementBackup = Join-Path $directory ('.anvil-spanish-{0}.replace-backup' -f [guid]::NewGuid().ToString('N'))
     $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
     try {
         [IO.File]::WriteAllText($temporaryPath, $Text, $utf8NoBom)
         if (Test-Path -LiteralPath $Path) {
-            [IO.File]::Replace($temporaryPath, $Path, $null, $true)
+            [IO.File]::Replace($temporaryPath, $Path, $replacementBackup, $true)
         } else {
             [IO.File]::Move($temporaryPath, $Path)
         }
     } finally {
         if (Test-Path -LiteralPath $temporaryPath) {
             Remove-Item -LiteralPath $temporaryPath -Force
+        }
+        if (Test-Path -LiteralPath $replacementBackup) {
+            Remove-Item -LiteralPath $replacementBackup -Force
         }
     }
 }
