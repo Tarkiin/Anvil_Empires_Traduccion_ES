@@ -6,7 +6,7 @@ param(
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 2.0
 
-$expectedHash = '0F8AFE1E609FD38EFD4E76CF3DB118DAC9F3FD6982FEB6FB0D08EF691D87B387'
+$expectedHash = '246740B49111213978DE3B926C01F0B877C2A416443DB04C2EBF1568F6FCA7A3'
 
 function Test-IsAdministrator {
     $identity = [Security.Principal.WindowsIdentity]::GetCurrent()

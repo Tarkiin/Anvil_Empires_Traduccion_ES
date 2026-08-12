@@ -6,7 +6,7 @@ Esta traducción solo esta creada y mantenida por **Tarkin**
 ## Estado actual
 
 - Compatible con **Anvil Empires Pre-Alpha, build 00235**.
-- Incluye 3007 identidades localizables jugables revisadas: menús, opciones, tutoriales, objetivos, acciones, avisos, topónimos, objetos, estructuras, recursos, armas, armaduras y vehículos.
+- Incluye 3012 identidades localizables jugables revisadas: menús, opciones, tutoriales, objetivos, acciones, avisos, topónimos, objetos, estructuras, recursos, armas, armaduras y vehículos.
 - Ya traduce `Town Keep`, `Town Keep Gate Front` y `Reinforced Wood Planks`.
 - Ya traduce la plata, la fibra, la fibra resistente, las semillas de cáñamo y la explicación de cambio de avatar.
 - Ya traduce las explicaciones de salud, resistencia y hambre, además del panel de la caja mágica.
@@ -23,8 +23,8 @@ Esta traducción solo esta creada y mantenida por **Tarkin**
 
 ## Progreso de la traducción
 
-- Se han identificado **3007 identidades localizables jugables** en la build actual.
-- **2850** tienen una traducción distinta de la fuente inglesa; las **157** coincidencias restantes se han revisado como nombres propios conservados, valores invariantes o textos técnicos/de muestra.
+- Se han identificado **3012 identidades localizables jugables** en la build actual.
+- **2855** tienen una traducción distinta de la fuente inglesa; las **157** coincidencias restantes se han revisado como nombres propios conservados, valores invariantes o textos técnicos/de muestra.
 - Se han incorporado 1936 claves suplementarias; varias variantes de objetos y estructuras reutilizan la misma fuente con GUID diferentes.
 - Este recuento corresponde a la **build 00235** y es provisional: incluye los FText Base recuperables del PAK completo y las claves nativas ya identificadas en el ejecutable.
 - Se han excluido del denominador 194 entradas internas/TODO/editor y 57 valores de muestra o contadores. Tampoco se cuentan cadenas remotas del servidor, keyless/invariant ni historiales FText todavía no interpretados.
