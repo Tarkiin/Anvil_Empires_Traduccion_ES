@@ -6,24 +6,25 @@ Esta traducción solo esta creada y mantenida por **Tarkin**
 ## Estado actual
 
 - Compatible con **Anvil Empires Pre-Alpha, build 00235**.
-- Incluye 1053 entradas de localización: menús, opciones, tutoriales, objetivos, acciones, avisos, topónimos y buena parte de la interfaz de juego.
+- Incluye 2955 entradas verificadas con la fuente exacta: menús, opciones, tutoriales, objetivos, acciones, avisos, topónimos, objetos, estructuras, recursos, armas, armaduras y vehículos.
 - Ya traduce `Town Keep`, `Town Keep Gate Front` y `Reinforced Wood Planks`.
 - Ya traduce la plata, la fibra, la fibra resistente, las semillas de cáñamo y la explicación de cambio de avatar.
 - Ya traduce las explicaciones de salud, resistencia y hambre, además del panel de la caja mágica.
-- Algunos nombres y descripciones de objetos todavía pueden aparecer en inglés mientras se completa el catálogo de recursos.
+- Ya traduce la espada corta de bronce, las flechas rudimentarias, el cuchillo de pedernal, materiales básicos, carros, caravanas y bases de roca cuadradas.
+- El conjunto FText Base identificado en la build actual está traducido; todavía pueden aparecer cadenas remotas, dinámicas, keyless o con un historial FText diferente.
 - El rótulo `Actions` de la caja mágica puede seguir apareciendo en inglés porque el juego sustituye en ejecución el texto localizable por una cadena interna.
 - La traducción puede dejar de funcionar después de una actualización del juego. Publicaremos una versión nueva cuando sea necesario.
 
 ## Progreso de la traducción
 
-- **1053/1053 entradas localizables identificadas** están incluidas en español (**100 %**).
-- No quedan entradas pendientes dentro del conjunto identificado y revisado para esta versión.
-- Este recuento corresponde a la **build 00235** y es provisional: el total aumenta cuando se localizan nuevos textos dentro de recursos cocinados que el extractor no puede interpretar automáticamente.
-- No se cuentan como pendientes los textos internos del editor de Unreal, notas de desarrollo, datos de prueba ni cadenas binarias inválidas que nunca aparecen al jugar.
+- **2955/2955 entradas localizables identificadas** están verificadas en español (**100 % del conjunto identificado**).
+- Se han incorporado 1884 claves nuevas correspondientes a 1125 textos ingleses distintos; varias variantes de objetos y estructuras reutilizan la misma fuente con GUID diferentes.
+- Este recuento corresponde a la **build 00235** y es provisional: incluye los FText Base recuperables del PAK completo y las claves nativas ya identificadas en el ejecutable.
+- Se han excluido del denominador 194 entradas internas/TODO/editor y 57 valores de muestra o contadores. Tampoco se cuentan cadenas remotas del servidor, keyless/invariant ni historiales FText todavía no interpretados.
 
 ### Qué falta por traducir
 
-- Textos aún no identificados que puedan estar almacenados dentro de Blueprints cocinados u otros recursos que el extractor no interpreta automáticamente.
+- Claves nativas o historiales FText que todavía no se hayan podido identificar automáticamente.
 - Cadenas que el juego genera o sustituye durante la ejecución, como `Actions` en la caja mágica.
 - Cualquier texto nuevo que aparezca después de una actualización del juego.
 

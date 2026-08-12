@@ -1,5 +1,18 @@
 # Historial de cambios
 
+## 0.3.1 — 2026-08-12
+
+- Auditoría completa del PAK: 2955 entradas localizables identificadas y 2955 verificadas en español (100 % del conjunto identificado).
+- Traducidas 1884 claves nuevas correspondientes a 1125 fuentes inglesas distintas: objetos, estructuras, recursos, armas, armaduras, vehículos, categorías y textos narrativos.
+- Resueltos los 2 conflictos donde la fuente almacenada no coincidía con el FText exacto del asset.
+- Excluidas del porcentaje 194 entradas internas/TODO/editor y 57 muestras o contadores que no representan texto jugable.
+- Añadido un inventario reproducible por clave, fuente y ruta para controlar futuras traducciones y cambios de build.
+- Corregidas 73 claves de Blueprints con namespace vacío que se habían compilado con el prefijo literal `::` y no eran reconocidas por el juego.
+- Traducidos la espada corta de bronce, las flechas rudimentarias para arco corto, el cuchillo de pedernal y sus descripciones.
+- Traducidos los tablones de madera, las ramas, el pedernal, la grasa animal, las manos y el martillo de hierro.
+- Traducidos el carro de mano, la caravana, sus descripciones de construcción y cuatro variantes de la base de roca cuadrada.
+- Regenerado el PAK con las claves FText exactas extraídas de los Blueprints visuales.
+
 ## 0.3.0 — 2026-08-12
 
 - Traducción ampliada a 1053 entradas de localización.
