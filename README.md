@@ -31,7 +31,11 @@ Esta traducción solo esta creada y mantenida por **Tarkin**
 ## Instalación automática
 
 1. Cierra Anvil Empires.
-2. Descarga solamente `Instalar_Traduccion.bat` desde GitHub. No tendrás que volver a descargar manualmente los parches posteriores.
+2. Descarga solamente el instalador desde este enlace:
+
+   **[Descargar Instalar_Traduccion.bat](https://github.com/Tarkiin/Anvil_Empires_Traduccion_ES/releases/latest/download/Instalar_Traduccion.bat)**
+
+   Es un archivo adjunto de GitHub Releases: el navegador lo descarga directamente en vez de mostrar su código. No tendrás que volver a descargar manualmente los parches posteriores.
 3. Ejecuta `Instalar_Traduccion.bat`. El BAT consulta la última versión publicada en la rama `main`, descarga los archivos correspondientes y comprueba su SHA-256.
 4. Acepta la solicitud de permisos de Windows. Es necesaria para copiar el PAK dentro de `Program Files`.
 5. Cuando aparezca el mensaje de instalación completada, abre el juego desde Steam.
@@ -45,6 +49,21 @@ El instalador busca la biblioteca de Steam, comprueba que el ejecutable correspo
 ```
 
 El repositorio completo continúa disponible mediante **Code > Download ZIP** para quienes prefieran la instalación manual o quieran conservar todos los archivos.
+
+## Publicar una versión
+
+Cada etiqueta con formato `v...` crea o actualiza automáticamente una GitHub Release y adjunta `Instalar_Traduccion.bat`. El enlace de descarga anterior siempre apunta al BAT de la Release más reciente.
+
+Ejemplo para publicar la versión `v0.3.2` después de integrar y verificar los cambios en `main`:
+
+```powershell
+git switch main
+git pull --ff-only
+git tag v0.3.2
+git push origin v0.3.2
+```
+
+También se puede ejecutar manualmente el flujo **Publicar instalador descargable** desde la pestaña **Actions** de GitHub, indicando una versión como `v0.3.2`.
 
 ## Instalación manual
 

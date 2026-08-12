@@ -1,5 +1,10 @@
 # Historial de cambios
 
+## Sin publicar
+
+- Añadido un sistema de GitHub Releases que publica `Instalar_Traduccion.bat` como archivo descargable.
+- Añadido un enlace estable que siempre descarga el instalador de la Release más reciente sin mostrar el código ni exigir descargar el repositorio.
+
 ## 0.3.1 — 2026-08-12
 
 - Auditoría completa del PAK: 2955 entradas localizables identificadas y 2955 verificadas en español (100 % del conjunto identificado).
