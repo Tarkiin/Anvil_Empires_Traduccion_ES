@@ -6,19 +6,21 @@ Esta traducción solo esta creada y mantenida por **Tarkin**
 ## Estado actual
 
 - Compatible con **Anvil Empires Pre-Alpha, build 00235**.
-- Incluye 2955 entradas verificadas con la fuente exacta: menús, opciones, tutoriales, objetivos, acciones, avisos, topónimos, objetos, estructuras, recursos, armas, armaduras y vehículos.
+- Incluye 2997 identidades localizables jugables revisadas: menús, opciones, tutoriales, objetivos, acciones, avisos, topónimos, objetos, estructuras, recursos, armas, armaduras y vehículos.
 - Ya traduce `Town Keep`, `Town Keep Gate Front` y `Reinforced Wood Planks`.
 - Ya traduce la plata, la fibra, la fibra resistente, las semillas de cáñamo y la explicación de cambio de avatar.
 - Ya traduce las explicaciones de salud, resistencia y hambre, además del panel de la caja mágica.
 - Ya traduce la espada corta de bronce, las flechas rudimentarias, el cuchillo de pedernal, materiales básicos, carros, caravanas y bases de roca cuadradas.
-- El conjunto FText Base identificado en la build actual está traducido; todavía pueden aparecer cadenas remotas, dinámicas, keyless o con un historial FText diferente.
+- Se han incorporado 42 identidades FText adicionales y se han corregido nueve variantes de topónimos que permanecían en inglés.
+- Todavía pueden aparecer cadenas remotas, dinámicas, keyless, pertenecientes a otros targets LOCRES o con un historial FText diferente.
 - El rótulo `Actions` de la caja mágica puede seguir apareciendo en inglés porque el juego sustituye en ejecución el texto localizable por una cadena interna.
 - La traducción puede dejar de funcionar después de una actualización del juego. Publicaremos una versión nueva cuando sea necesario.
 
 ## Progreso de la traducción
 
-- **2955/2955 entradas localizables identificadas** están verificadas en español (**100 % del conjunto identificado**).
-- Se han incorporado 1884 claves nuevas correspondientes a 1125 textos ingleses distintos; varias variantes de objetos y estructuras reutilizan la misma fuente con GUID diferentes.
+- Se han identificado **2997 identidades localizables jugables** en la build actual.
+- **2841** tienen una traducción distinta de la fuente inglesa; las **156** coincidencias restantes se han revisado como nombres propios conservados, valores invariantes o textos técnicos/de muestra.
+- Se han incorporado 1926 claves suplementarias; varias variantes de objetos y estructuras reutilizan la misma fuente con GUID diferentes.
 - Este recuento corresponde a la **build 00235** y es provisional: incluye los FText Base recuperables del PAK completo y las claves nativas ya identificadas en el ejecutable.
 - Se han excluido del denominador 194 entradas internas/TODO/editor y 57 valores de muestra o contadores. Tampoco se cuentan cadenas remotas del servidor, keyless/invariant ni historiales FText todavía no interpretados.
 
@@ -26,6 +28,8 @@ Esta traducción solo esta creada y mantenida por **Tarkin**
 
 - Claves nativas o historiales FText que todavía no se hayan podido identificar automáticamente.
 - Cadenas que el juego genera o sustituye durante la ejecución, como `Actions` en la caja mágica.
+- Ocho mensajes FString de voz y trece variantes FText que comparten identidad con otra fuente; no pueden resolverse de forma fiable añadiendo otra fila al LOCRES principal.
+- Cincuenta y ocho mensajes potencialmente visibles de Engine y servicios online que pertenecen a targets LOCRES separados y requieren un parche y pruebas específicos.
 - Cualquier texto nuevo que aparezca después de una actualización del juego.
 
 ## Instalación automática
@@ -54,7 +58,7 @@ El repositorio completo continúa disponible mediante **Code > Download ZIP** pa
 
 Cada etiqueta con formato `v...` crea o actualiza automáticamente una GitHub Release y adjunta `Instalar_Traduccion.bat`. El enlace de descarga anterior siempre apunta al BAT de la Release más reciente.
 
-Ejemplo para publicar la versión `v0.3.2` después de integrar y verificar los cambios en `main`:
+Ejemplo para publicar una versión después de integrar y verificar los cambios en `main`:
 
 ```powershell
 git switch main

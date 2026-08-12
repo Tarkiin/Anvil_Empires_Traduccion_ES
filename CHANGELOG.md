@@ -1,9 +1,13 @@
 # Historial de cambios
 
-## Sin publicar
+## 0.3.2 — 2026-08-12
 
 - Añadido un sistema de GitHub Releases que publica `Instalar_Traduccion.bat` como archivo descargable.
 - Añadido un enlace estable que siempre descarga el instalador de la Release más reciente sin mostrar el código ni exigir descargar el repositorio.
+- Incorporadas 42 identidades FText nuevas: 34 cadenas nativas y 8 textos de chat y señalización.
+- Corregidas nueve identidades de topónimos que el contador anterior daba por traducidas aunque seguían en inglés.
+- Sustituido el porcentaje engañoso por un control auditable: 2997 identidades jugables, 2841 traducciones distintas de la fuente y 156 coincidencias revisadas.
+- Documentados por separado los textos keyless, las colisiones de identidad y 58 mensajes pertenecientes a otros targets LOCRES.
 
 ## 0.3.1 — 2026-08-12
 
