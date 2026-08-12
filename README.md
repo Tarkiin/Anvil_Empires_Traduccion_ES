@@ -76,13 +76,13 @@ C:\Program Files (x86)\Steam\steamapps\common\Anvil Playtest\Anvil\Content\Paks
 
 Si Steam está instalado en otra unidad, utiliza la carpeta equivalente de esa biblioteca.
 
-1. Abre o crea este archivo:
+3. Abre o crea este archivo:
 
 ```text
 %LOCALAPPDATA%\Anvil\Saved\Config\Windows\Engine.ini
 ```
 
-1. Añade al final:
+4. Añade al final:
 
 ```ini
 [Internationalization]
@@ -105,7 +105,7 @@ El SHA-256 oficial del PAK incluido en esta versión está en `SHA256SUMS.txt`. 
 
 ## Problemas y textos sin traducir
 
-Al informar de un texto sin traducir, adjunta una captura y explica en qué menú, edificio u objeto aparece. No incluyas datos personales ni credenciales en la captura.
+Al informar de un texto sin traducir, adjunta una captura y explica en qué menú, edificio u objeto aparece.
 
 ## Aviso
 
