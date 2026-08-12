@@ -6,21 +6,26 @@ Esta traducción solo esta creada y mantenida por **Tarkin**
 ## Estado actual
 
 - Compatible con **Anvil Empires Pre-Alpha, build 00235**.
-- Incluye 2997 identidades localizables jugables revisadas: menús, opciones, tutoriales, objetivos, acciones, avisos, topónimos, objetos, estructuras, recursos, armas, armaduras y vehículos.
+- Incluye 3007 identidades localizables jugables revisadas: menús, opciones, tutoriales, objetivos, acciones, avisos, topónimos, objetos, estructuras, recursos, armas, armaduras y vehículos.
 - Ya traduce `Town Keep`, `Town Keep Gate Front` y `Reinforced Wood Planks`.
 - Ya traduce la plata, la fibra, la fibra resistente, las semillas de cáñamo y la explicación de cambio de avatar.
 - Ya traduce las explicaciones de salud, resistencia y hambre, además del panel de la caja mágica.
 - Ya traduce la espada corta de bronce, las flechas rudimentarias, el cuchillo de pedernal, materiales básicos, carros, caravanas y bases de roca cuadradas.
 - Se han incorporado 42 identidades FText adicionales y se han corregido nueve variantes de topónimos que permanecían en inglés.
+- Ya se traducen las descripciones breves del tablón de recompensas, la gestión de la Casa, la lista de jugadores cercanos y la organización del inventario.
+- Ya se traducen también la entrega de vehículos, la ayuda de recuperación del avatar, las raciones auxiliares, la explicación general de los avatares, el límite de estatus urbano y el acceso al almacén privado.
+- Corregida la plantilla de equipo de facción para que el icono y el texto de equipo pagano no aparezcan como una etiqueta `<img>` literal.
 - Todavía pueden aparecer cadenas remotas, dinámicas, keyless, pertenecientes a otros targets LOCRES o con un historial FText diferente.
 - El rótulo `Actions` de la caja mágica puede seguir apareciendo en inglés porque el juego sustituye en ejecución el texto localizable por una cadena interna.
+- El juego reutiliza `DamageTypeFooterText` con dos fuentes distintas; esta versión prioriza la plantilla de equipo que corrige el icono de la armadura, por lo que la variante de daño puede volver al inglés en otro contexto.
+- El juego reutiliza `AvatarRecoveryTips` para tiendas y camas; esta versión prioriza la variante de tiendas observada en pantalla.
 - La traducción puede dejar de funcionar después de una actualización del juego. Publicaremos una versión nueva cuando sea necesario.
 
 ## Progreso de la traducción
 
-- Se han identificado **2997 identidades localizables jugables** en la build actual.
-- **2841** tienen una traducción distinta de la fuente inglesa; las **156** coincidencias restantes se han revisado como nombres propios conservados, valores invariantes o textos técnicos/de muestra.
-- Se han incorporado 1926 claves suplementarias; varias variantes de objetos y estructuras reutilizan la misma fuente con GUID diferentes.
+- Se han identificado **3007 identidades localizables jugables** en la build actual.
+- **2850** tienen una traducción distinta de la fuente inglesa; las **157** coincidencias restantes se han revisado como nombres propios conservados, valores invariantes o textos técnicos/de muestra.
+- Se han incorporado 1936 claves suplementarias; varias variantes de objetos y estructuras reutilizan la misma fuente con GUID diferentes.
 - Este recuento corresponde a la **build 00235** y es provisional: incluye los FText Base recuperables del PAK completo y las claves nativas ya identificadas en el ejecutable.
 - Se han excluido del denominador 194 entradas internas/TODO/editor y 57 valores de muestra o contadores. Tampoco se cuentan cadenas remotas del servidor, keyless/invariant ni historiales FText todavía no interpretados.
 
@@ -63,11 +68,11 @@ Ejemplo para publicar una versión después de integrar y verificar los cambios 
 ```powershell
 git switch main
 git pull --ff-only
-git tag v0.3.2
-git push origin v0.3.2
+git tag v0.3.3
+git push origin v0.3.3
 ```
 
-También se puede ejecutar manualmente el flujo **Publicar instalador descargable** desde la pestaña **Actions** de GitHub, indicando una versión como `v0.3.2`.
+También se puede ejecutar manualmente el flujo **Publicar instalador descargable** desde la pestaña **Actions** de GitHub, indicando una versión como `v0.3.3`.
 
 ## Instalación manual
 

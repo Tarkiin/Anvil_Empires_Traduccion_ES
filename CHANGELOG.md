@@ -1,5 +1,15 @@
 # Historial de cambios
 
+## 0.3.3 — 2026-08-12
+
+- Añadidas las cuatro identidades nativas omitidas para las descripciones del tablón de recompensas, la gestión de la Casa, la lista de jugadores cercanos y la organización del inventario.
+- Corregida la plantilla de equipo de facción para conservar el identificador de icono y mostrar `Equipo de Paganos` en vez de la etiqueta `<img>` literal.
+- Corregida la compilación de saltos `CRLF` para que se apliquen las traducciones multilínea de la introducción pagana, la piedra angular de la hacienda y los tramos de acueducto.
+- Añadidas las descripciones omitidas de entrega de vehículos, recuperación del avatar, raciones auxiliares, avatares, límite de estatus urbano y almacén privado.
+- Ampliado el conjunto identificado a 3007 identidades jugables, con 2850 traducciones distintas de la fuente y 157 coincidencias revisadas.
+- Ampliado el conjunto identificado a 3001 identidades jugables, con 2844 traducciones distintas de la fuente y 157 coincidencias revisadas.
+- Regenerado y validado el PAK con 3013 entradas LOCRES y únicamente los dos archivos de localización previstos.
+
 ## 0.3.2 — 2026-08-12
 
 - Añadido un sistema de GitHub Releases que publica `Instalar_Traduccion.bat` como archivo descargable.
