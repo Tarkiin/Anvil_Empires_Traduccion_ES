@@ -6,9 +6,10 @@
 - Corregida la plantilla de equipo de facción para conservar el identificador de icono y mostrar `Equipo de Paganos` en vez de la etiqueta `<img>` literal.
 - Corregida la compilación de saltos `CRLF` para que se apliquen las traducciones multilínea de la introducción pagana, la piedra angular de la hacienda y los tramos de acueducto.
 - Añadidas las descripciones omitidas de entrega de vehículos, recuperación del avatar, raciones auxiliares, avatares, límite de estatus urbano y almacén privado.
-- Ampliado el conjunto identificado a 3007 identidades jugables, con 2850 traducciones distintas de la fuente y 157 coincidencias revisadas.
-- Ampliado el conjunto identificado a 3001 identidades jugables, con 2844 traducciones distintas de la fuente y 157 coincidencias revisadas.
-- Regenerado y validado el PAK con 3013 entradas LOCRES y únicamente los dos archivos de localización previstos.
+- Añadidas las indicaciones omitidas de condición física, combate cuerpo a cuerpo, combate a distancia, tala y minería.
+- Traducido el aviso omitido `Space is occupied` mediante su identidad nativa exacta.
+- Ampliado el conjunto identificado a 3012 identidades jugables, con 2855 traducciones distintas de la fuente y 157 coincidencias revisadas.
+- Regenerado y validado el PAK con 3024 entradas LOCRES y únicamente los dos archivos de localización previstos.
 
 ## 0.3.2 — 2026-08-12
 
