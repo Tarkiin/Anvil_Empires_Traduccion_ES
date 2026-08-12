@@ -14,10 +14,10 @@ Esta traducción solo esta creada y mantenida por **Tarkin**
 - Se han incorporado 42 identidades FText adicionales y se han corregido nueve variantes de topónimos que permanecían en inglés.
 - Ya se traducen las descripciones breves del tablón de recompensas, la gestión de la Casa, la lista de jugadores cercanos y la organización del inventario.
 - Ya se traducen también la entrega de vehículos, la ayuda de recuperación del avatar, las raciones auxiliares, la explicación general de los avatares, el límite de estatus urbano y el acceso al almacén privado.
-- Corregida la plantilla de equipo de facción para que el icono y el texto de equipo pagano no aparezcan como una etiqueta `<img>` literal.
+- Corregida la plantilla de equipo de facción para mostrar solo `Equipo de Paganos`, sin la etiqueta `<img>` que el juego dejaba visible al localizar su ID interno.
 - Todavía pueden aparecer cadenas remotas, dinámicas, keyless, pertenecientes a otros targets LOCRES o con un historial FText diferente.
 - El rótulo `Actions` de la caja mágica puede seguir apareciendo en inglés porque el juego sustituye en ejecución el texto localizable por una cadena interna.
-- El juego reutiliza `DamageTypeFooterText` con dos fuentes distintas; esta versión prioriza la plantilla de equipo que corrige el icono de la armadura, por lo que la variante de daño puede volver al inglés en otro contexto.
+- El juego reutiliza `DamageTypeFooterText` con dos fuentes distintas; esta versión prioriza la plantilla de equipo y omite su icono incompatible, por lo que la variante de daño puede volver al inglés en otro contexto.
 - El juego reutiliza `AvatarRecoveryTips` para tiendas y camas; esta versión prioriza la variante de tiendas observada en pantalla.
 - La traducción puede dejar de funcionar después de una actualización del juego. Publicaremos una versión nueva cuando sea necesario.
 

@@ -3,7 +3,7 @@
 ## 0.3.3 — 2026-08-12
 
 - Añadidas las cuatro identidades nativas omitidas para las descripciones del tablón de recompensas, la gestión de la Casa, la lista de jugadores cercanos y la organización del inventario.
-- Corregida la plantilla de equipo de facción para conservar el identificador de icono y mostrar `Equipo de Paganos` en vez de la etiqueta `<img>` literal.
+- Corregida la plantilla de equipo de facción para mostrar `Equipo de Paganos` sin la etiqueta `<img>` que el juego dejaba visible al localizar el ID interno del icono.
 - Corregida la compilación de saltos `CRLF` para que se apliquen las traducciones multilínea de la introducción pagana, la piedra angular de la hacienda y los tramos de acueducto.
 - Añadidas las descripciones omitidas de entrega de vehículos, recuperación del avatar, raciones auxiliares, avatares, límite de estatus urbano y almacén privado.
 - Añadidas las indicaciones omitidas de condición física, combate cuerpo a cuerpo, combate a distancia, tala y minería.
