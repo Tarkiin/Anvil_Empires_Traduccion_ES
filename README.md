@@ -5,8 +5,8 @@ Esta traducción solo esta creada y mantenida por **Tarkin**
 
 ## Estado actual
 
-- Compatible con **Anvil Empires Pre-Alpha, build 00235**.
-- Incluye 3012 identidades localizables jugables revisadas: menús, opciones, tutoriales, objetivos, acciones, avisos, topónimos, objetos, estructuras, recursos, armas, armaduras y vehículos.
+- Compatible con **Anvil Empires Pre-Alpha, build de Steam 24720754**.
+- Incluye 3242 identidades localizables jugables revisadas: menús, opciones, tutoriales, objetivos, acciones, avisos, topónimos, objetos, estructuras, recursos, armas, armaduras y vehículos.
 - Ya traduce `Town Keep`, `Town Keep Gate Front` y `Reinforced Wood Planks`.
 - Ya traduce la plata, la fibra, la fibra resistente, las semillas de cáñamo y la explicación de cambio de avatar.
 - Ya traduce las explicaciones de salud, resistencia y hambre, además del panel de la caja mágica.
@@ -14,19 +14,21 @@ Esta traducción solo esta creada y mantenida por **Tarkin**
 - Se han incorporado 42 identidades FText adicionales y se han corregido nueve variantes de topónimos que permanecían en inglés.
 - Ya se traducen las descripciones breves del tablón de recompensas, la gestión de la Casa, la lista de jugadores cercanos y la organización del inventario.
 - Ya se traducen también la entrega de vehículos, la ayuda de recuperación del avatar, las raciones auxiliares, la explicación general de los avatares, el límite de estatus urbano y el acceso al almacén privado.
+- Añadidas las descripciones de entrega de recompensas, herrería y reclutamiento de avatares, junto con `Usar cerca` y la recuperación mediante camas cercanas.
+- Añadidos avisos nativos de actividad, restricciones de construcción y acceso, pesca, herramientas, despliegue y desconexión que no aparecían en la extracción anterior.
 - Corregida la plantilla de equipo de facción para mostrar solo `Equipo de Paganos`, sin la etiqueta `<img>` que el juego dejaba visible al localizar su ID interno.
 - Todavía pueden aparecer cadenas remotas, dinámicas, keyless, pertenecientes a otros targets LOCRES o con un historial FText diferente.
 - El rótulo `Actions` de la caja mágica puede seguir apareciendo en inglés porque el juego sustituye en ejecución el texto localizable por una cadena interna.
 - El juego reutiliza `DamageTypeFooterText` con dos fuentes distintas; esta versión prioriza la plantilla de equipo y omite su icono incompatible, por lo que la variante de daño puede volver al inglés en otro contexto.
-- El juego reutiliza `AvatarRecoveryTips` para tiendas y camas; esta versión prioriza la variante de tiendas observada en pantalla.
+- El juego reutiliza `AvatarRecoveryTips` para tiendas y camas; esta versión prioriza la variante de camas observada en la build actual.
 - La traducción puede dejar de funcionar después de una actualización del juego. Publicaremos una versión nueva cuando sea necesario.
 
 ## Progreso de la traducción
 
-- Se han identificado **3012 identidades localizables jugables** en la build actual.
-- **2855** tienen una traducción distinta de la fuente inglesa; las **157** coincidencias restantes se han revisado como nombres propios conservados, valores invariantes o textos técnicos/de muestra.
-- Se han incorporado 1936 claves suplementarias; varias variantes de objetos y estructuras reutilizan la misma fuente con GUID diferentes.
-- Este recuento corresponde a la **build 00235** y es provisional: incluye los FText Base recuperables del PAK completo y las claves nativas ya identificadas en el ejecutable.
+- Se han identificado **3242 identidades localizables jugables** en la build actual y no queda ninguna pendiente dentro de este conjunto conocido.
+- **3085** tienen una traducción distinta de la fuente inglesa; las **157** coincidencias restantes se han revisado como nombres propios conservados, valores invariantes o textos técnicos/de muestra.
+- Esta revisión incorpora 230 identidades jugables adicionales. El PAK contiene 3254 entradas LOCRES en total; las 12 restantes son textos de muestra, marcadores de posición o una identidad antigua excluida del denominador jugable.
+- Este recuento corresponde a la **build de Steam 24720754** y es provisional: incluye los FText Base recuperables del PAK completo y las claves nativas identificadas en el ejecutable.
 - Se han excluido del denominador 194 entradas internas/TODO/editor y 57 valores de muestra o contadores. Tampoco se cuentan cadenas remotas del servidor, keyless/invariant ni historiales FText todavía no interpretados.
 
 ### Qué falta por traducir
@@ -51,28 +53,13 @@ Esta traducción solo esta creada y mantenida por **Tarkin**
 
 Cada revisión se descarga desde un único commit de GitHub para impedir que se mezclen archivos de versiones distintas. El PAK verificado queda guardado en caché, por lo que ejecutar de nuevo el BAT no vuelve a descargarlo si ya tienes la versión más reciente. Si GitHub no está disponible, el instalador puede reutilizar la última copia verificada guardada en el equipo.
 
-El instalador busca la biblioteca de Steam, comprueba que el ejecutable corresponde a la build 00235, copia el parche y configura el idioma `es`. Si encuentra una versión anterior del parche o un archivo de configuración, crea una copia de seguridad. Las descargas verificadas y las copias de seguridad se guardan dentro de:
+El instalador busca la biblioteca de Steam, comprueba que el ejecutable corresponde a la build de Steam 24720754, copia el parche y configura el idioma `es`. Si encuentra una versión anterior del parche o un archivo de configuración, crea una copia de seguridad. Las descargas verificadas y las copias de seguridad se guardan dentro de:
 
 ```text
 %LOCALAPPDATA%\AnvilSpanishTranslation
 ```
 
 El repositorio completo continúa disponible mediante **Code > Download ZIP** para quienes prefieran la instalación manual o quieran conservar todos los archivos.
-
-## Publicar una versión
-
-Cada etiqueta con formato `v...` crea o actualiza automáticamente una GitHub Release y adjunta `Instalar_Traduccion.bat`. El enlace de descarga anterior siempre apunta al BAT de la Release más reciente.
-
-Ejemplo para publicar una versión después de integrar y verificar los cambios en `main`:
-
-```powershell
-git switch main
-git pull --ff-only
-git tag v0.3.3
-git push origin v0.3.3
-```
-
-También se puede ejecutar manualmente el flujo **Publicar instalador descargable** desde la pestaña **Actions** de GitHub, indicando una versión como `v0.3.3`.
 
 ## Instalación manual
 

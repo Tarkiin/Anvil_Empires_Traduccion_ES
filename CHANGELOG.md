@@ -1,5 +1,17 @@
 # Historial de cambios
 
+## 0.3.4 — 2026-08-15
+
+- Actualizada la compatibilidad a Anvil Empires Pre-Alpha, build de Steam 24720754, y la validación del ejecutable al SHA-256 `C11262C1861252EF0B0AD05073E5675DD58C93059F7D67C4F1C29A7FC692C16F`.
+- Añadidas 230 identidades jugables que la extracción anterior no detectaba en el ejecutable actualizado.
+- Traducidas las descripciones omitidas de entrega de recompensas, herrería y reclutamiento de avatares, además del rótulo `Usar cerca`.
+- Actualizada la ayuda de recuperación del avatar para priorizar la variante de camas cercanas observada en la build actual.
+- Añadidos avisos nativos de actividad y estado, pesca, herramientas, despliegue y desconexión, junto con restricciones de construcción, acceso y colocación.
+- Adaptado el extractor de textos nativos a la distribución PE del ejecutable actual y auditado de nuevo el PAK completo.
+- Ampliado el conjunto identificado a 3242 identidades jugables, con 3085 traducciones distintas de la fuente, 157 coincidencias revisadas y ninguna pendiente dentro del conjunto conocido.
+- Regenerado y validado el PAK con 3254 entradas LOCRES y únicamente los dos archivos de localización previstos.
+- Actualizados el instalador, el desinstalador y `SHA256SUMS.txt` al SHA-256 `37B7E722362667BFAB1AE68939B6DE1402308FF244BD53C3A6921AA179802644`.
+
 ## 0.3.3 — 2026-08-12
 
 - Añadidas las cuatro identidades nativas omitidas para las descripciones del tablón de recompensas, la gestión de la Casa, la lista de jugadores cercanos y la organización del inventario.

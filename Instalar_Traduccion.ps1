@@ -8,8 +8,8 @@ Set-StrictMode -Version 2.0
 
 $patchName = 'AnvilSpanish_P.pak'
 $patchSource = Join-Path $PSScriptRoot $patchName
-$expectedHash = '6E3B6639F3BD14681B0DF8F22D48344E6850B84C9E93FC6ACF625DCAF11EF4E6'
-$expectedGameExeHash = '4772FF6C1ACCEB0A9671D70A4AE9383C03B20804061121AFD5001FBAFCCE87BB'
+$expectedHash = '37B7E722362667BFAB1AE68939B6DE1402308FF244BD53C3A6921AA179802644'
+$expectedGameExeHash = 'C11262C1861252EF0B0AD05073E5675DD58C93059F7D67C4F1C29A7FC692C16F'
 
 function Test-IsAdministrator {
     $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
@@ -194,7 +194,7 @@ try {
     $gameExe = Join-Path $resolvedGamePath 'Anvil\Binaries\Win64\Anvil-Win64-Shipping.exe'
     $gameExeHash = (Get-FileHash -LiteralPath $gameExe -Algorithm SHA256).Hash
     if ($gameExeHash -ne $expectedGameExeHash) {
-        throw 'Esta traduccion se ha probado solamente con la build 00235. El ejecutable instalado pertenece a otra version y no se modificara.'
+        throw 'Esta traduccion se ha probado solamente con la build de Steam 24720754. El ejecutable instalado pertenece a otra version y no se modificara.'
     }
 
     $paksDirectory = Join-Path $resolvedGamePath 'Anvil\Content\Paks'
